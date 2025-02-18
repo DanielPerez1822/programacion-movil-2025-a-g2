@@ -8,8 +8,11 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      # - MYSQL_ROOT_PASSWORD='123456'
+      # - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      # - MYSQL_RANDOM_ROOT_PASSWORD=true
     ports:
-      - "3308:3308"
+      - "3306:3306"
     networks:
       - network_local_server
     volumes:
