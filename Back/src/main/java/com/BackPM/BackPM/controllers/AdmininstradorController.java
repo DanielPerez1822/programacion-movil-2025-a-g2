@@ -5,7 +5,7 @@ import com.BackPM.BackPM.services.IService.IAdministradorService;
 
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/administradores")
 public class AdmininstradorController extends ABaseController<Administrador, IAdministradorService> {

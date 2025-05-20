@@ -6,7 +6,7 @@ import com.BackPM.BackPM.services.IService.IEmpleadoService;
 
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadoController extends ABaseController<Empleado, IEmpleadoService> {

@@ -5,7 +5,7 @@ import com.BackPM.BackPM.services.IService.IDetalleFacturaService;
 
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/DetalleFactura")
 public class Detalle_FacturaController extends ABaseController<Detalle_Factura, IDetalleFacturaService> {
