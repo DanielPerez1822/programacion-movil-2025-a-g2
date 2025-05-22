@@ -62,8 +62,24 @@
           >
             Agregar
           </ion-button>
-          <ion-button expand="block" class="black-button" @click="cancel" type="button">Cancelar</ion-button>
-
+          <ion-button
+            v-if="isEditing"
+            expand="block"
+            class="black-button"
+            @click="eliminarProducto"
+            type="button"
+          >
+            Eliminar
+          </ion-button>
+          <ion-button
+            v-else
+            expand="block"
+            class="black-button"
+            @click="cancel"
+            type="button"
+          >
+            Cancelar
+          </ion-button>
           <div v-if="errorMessage" style="color:red; margin-top:10px;">{{ errorMessage }}</div>
         </form>
       </div>
@@ -214,6 +230,17 @@ watch(
     }
   }
 );
+
+const eliminarProducto = async () => {
+  try {
+    if (product.value.id) {
+      await ProductoService.remove(product.value.id);
+      reloadPage();
+    }
+  } catch (error: any) {
+    errorMessage.value = error.response?.data?.message || "Error al eliminar el producto.";
+  }
+};
 </script>
 
 <style scoped>

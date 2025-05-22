@@ -95,7 +95,8 @@ const productosPorCategoria = computed(() => {
 
 const productosFiltrados = computed(() => {
   const texto = busqueda.value.trim().toLowerCase();
-  const productosCat = productosPorCategoria.value[Number(categoriaSeleccionadaId.value)] || [];
+  // Solo productos con status true
+  const productosCat = (productosPorCategoria.value[Number(categoriaSeleccionadaId.value)] || []).filter(p => p.status === true);
   if (!texto) return productosCat;
   return productosCat.filter(p =>
     p.nombreProducto.toLowerCase().includes(texto) ||
