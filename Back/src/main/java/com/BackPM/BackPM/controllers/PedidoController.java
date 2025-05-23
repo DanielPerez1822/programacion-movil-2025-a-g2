@@ -19,16 +19,6 @@ public class PedidoController extends ABaseController<Pedido, IPedidoService> {
         //TODO Auto-generated constructor stub
     }
     
-    @GetMapping("/findByAdministrador/{id}")
-    public List<Pedido> findByAdministradorId(@PathVariable Integer id) {
-        return pedidoService.findByAdministradorId(id);
-    }
-
-    @GetMapping("/findByEmpleado/{id}")
-    public List<Pedido> findByEmpleadoId(@PathVariable Integer id) {
-        return pedidoService.findByEmpleadoId(id);
-    }
-
     @GetMapping("/findByProducto/{id}")
     public List<Pedido> findByProductoId(@PathVariable Long id) {
         return pedidoService.findByProductoId(id);

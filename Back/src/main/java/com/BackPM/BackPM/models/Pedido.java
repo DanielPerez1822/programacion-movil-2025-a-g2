@@ -15,14 +15,6 @@ public class Pedido extends ABaseEntity {
     @Column(name = "estado")
     private Boolean estado;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "administrador_id", nullable = true)
-    private Administrador administradorId;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "empleado_id", nullable = true)
-    private Empleado empleadoId;
-
     @ManyToMany
     @JoinTable(
         name = "pedido_producto",
@@ -47,22 +39,6 @@ public class Pedido extends ABaseEntity {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
-    }
-
-    public Administrador getAdministradorId() {
-        return administradorId;
-    }
-
-    public void setAdministradorId(Administrador administradorId) {
-        this.administradorId = administradorId;
-    }
-
-    public Empleado getEmpleadoId() {
-        return empleadoId;
-    }
-
-    public void setEmpleadoId(Empleado empleadoId) {
-        this.empleadoId = empleadoId;
     }
 
     public List<Producto> getProductos() {
