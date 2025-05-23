@@ -22,16 +22,6 @@ public class PedidoServiceImpl extends ABaseService<Pedido> implements IPedidoSe
     }
 
     @Override
-    public List<Pedido> findByAdministradorId(Integer administradorId) {
-        return pedidoRepository.findByAdministradorId_Id(administradorId);
-    }
-
-    @Override
-    public List<Pedido> findByEmpleadoId(Integer empleadoId) {
-        return pedidoRepository.findByEmpleadoId_Id(empleadoId);
-    }
-
-    @Override
     public List<Pedido> findByProductoId(Long productoId) {
         return pedidoRepository.findByProductos_Id(productoId);
     }
