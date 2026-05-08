@@ -54,6 +54,40 @@
         </ion-label>
       </div>
     </ion-content>
+
+    <!-- FAB crear categoría -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab-categoria">
+      <ion-fab-button @click="openCategoriaModal">
+        <ion-icon :icon="addIcon" />
+      </ion-fab-button>
+    </ion-fab>
+
+    <!-- Modal crear categoría -->
+    <ion-modal :is-open="categoriaModalOpen" @didDismiss="closeCategoriaModal">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Crear categoría</ion-title>
+          <ion-buttons slot="end">
+            <ion-button @click="closeCategoriaModal">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-item lines="none">
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input v-model="categoriaNombreInput" placeholder="Ej: Bebidas" />
+        </ion-item>
+
+        <div v-if="categoriaError" class="categoria-error">
+          {{ categoriaError }}
+        </div>
+
+        <ion-button expand="block" class="black-button" @click="createCategoria">
+          Guardar
+        </ion-button>
+      </ion-content>
+    </ion-modal>
   </ion-page>
 </template>
 
@@ -61,7 +95,9 @@
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonList, IonItem, IonLabel, IonButton, IonButtons,
-  IonItemDivider, IonSegment, IonSegmentButton, IonSearchbar
+  IonSegment, IonSegmentButton, IonSearchbar,
+  IonModal, IonFab, IonFabButton, IonIcon,
+  IonInput
 } from '@ionic/vue';
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
@@ -182,8 +218,44 @@ function goToEditProduct(productoId: number) {
   router.push(`/productos/editar/${productoId}`);
 }
 
+const addIcon = 'add-circle-outline';
+
+const categoriaModalOpen = ref(false);
+const categoriaNombreInput = ref('');
+const categoriaError = ref('');
+
+function openCategoriaModal() {
+  categoriaModalOpen.value = true;
+  categoriaError.value = '';
+  categoriaNombreInput.value = '';
+}
+
+function closeCategoriaModal() {
+  categoriaModalOpen.value = false;
+  categoriaError.value = '';
+  categoriaNombreInput.value = '';
+}
+
+async function createCategoria() {
+  categoriaError.value = '';
+  const nombre = categoriaNombreInput.value.trim();
+
+  if (!nombre) {
+    categoriaError.value = 'El nombre de la categoría es obligatorio.';
+    return;
+  }
+
+  try {
+    await CategoriaService.create({ nombreCategoria: nombre } as any);
+    await fetchCategorias();
+    closeCategoriaModal();
+  } catch (error: any) {
+    categoriaError.value = error?.response?.data?.message || 'Error al crear la categoría.';
+  }
+}
+
 function formatPrecio(valor: number) {
-  return valor.toLocaleString('es-CO'); 
+  return valor.toLocaleString('es-CO');
 }
 </script>
 

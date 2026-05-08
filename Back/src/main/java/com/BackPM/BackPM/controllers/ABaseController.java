@@ -3,6 +3,7 @@ package com.BackPM.BackPM.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ public abstract class ABaseController<T extends ABaseEntity, S extends IBaseServ
         this.entityName = entityName;
     }
 
+    @CrossOrigin(origins = "https://localhost:9000")
     @GetMapping
     public ResponseEntity<ApiResponseDto<List<T>>> findByStateTrue() {
         try {

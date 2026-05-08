@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
 	info = @Info(title = "BackendPM API", version = "v1"),
 	servers = {
-		@Server(url = "https://3r7vcx2t-9000.use2.devtunnels.ms")
+		@Server(url = "http://localhost:9000/")
 	}
 )
 @SpringBootApplication
